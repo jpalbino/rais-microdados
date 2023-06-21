@@ -10,21 +10,20 @@ library(data.table)
 # Indicar a pasta onde os arquivos serão baixados
 diretorio <- "./dados/"
 
-# Teste de download para Estado de SP
+# Teste de download para Estado 
 
 uf = "PR" # Especificar a sigla do Estado 
 year = 2013 # Especificar o ano. Na base atual vai até 2017, apenas!
 files <- paste0(uf,year,'.7z') # Os dados estão em arquivos compactados .7z
 ftp.path <- paste0('ftp://ftp.mtps.gov.br/pdet/microdados/RAIS/',year,'/',files)
-download.file(ftp.path, destfile=paste0(diretorio,files), mode='wb', method='libcurl')
 
-# Para descompatar
+# Para baixar e já descompatar
 if (!('archive') %in% installed.packages()) install.packages('archive')
 library(archive)
 tf <- tempfile()
 td <- tempdir()
 download.file(ftp.path, destfile=tf, mode='wb', method='libcurl')
-files.data <- unzip( tf , exdir = td )
+
 archive(tf)
 archive_extract(
   tf,
@@ -33,8 +32,4 @@ archive_extract(
   options = character(),
   strip_components = 0L
 )
-
-archive("./dados/SP2017.7z")
-
-system('./dados/7z.exe e -o ./dados/ ./dados/SP2013.7z')
 
