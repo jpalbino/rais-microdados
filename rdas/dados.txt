@@ -1,0 +1,1 @@
+CBO Ocupação 2002','Vínculo Ativo 31/12', Faixa Etária, Escolaridade, Idade, Município, Raça Cor, 'Vl Remun Média Nom','Sexo Trabalhador'
